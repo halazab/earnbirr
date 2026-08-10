@@ -1,0 +1,64 @@
+name: earnbirr
+app_id: da_KAmI3tXUB3Me
+owner: halazab
+package: .
+env:
+  PHPIX_PHP_THREADS: '4'
+  APP_KEY: base64:CYjF9hplN2E2MUdW8zB+1iqucHYtGE4me0nWYsR2FUs=
+  APP_DEBUG: 'false'
+  APP_NAME: EarnBirr
+  APP_URL: https://earnbirr.wasmer.app
+  DB_CONNECTION: mysql
+  DB_HOST: db.fr-roub1.bengt.wasmernet.com
+  DB_PORT: '20184'
+  DB_DATABASE: db_421751a8
+  DB_USERNAME: user_79f41408
+  DB_PASSWORD: pw_e2TDh46RypQmIAKVaVNEtGsfHtd49FUF
+  SESSION_DRIVER: database
+  SESSION_TABLE: sessions
+  SESSION_SECURE_COOKIE: 'true'
+  SESSION_LIFETIME: '1440'
+  CACHE_STORE: database
+  LOG_CHANNEL: stderr
+  APP_ENV: production
+capabilities:
+  database:
+    engine: mysql
+debug: true
+scaling:
+  mode: single_concurrency
+jobs:
+- name: migrate-and-seed
+  trigger: post-deployment
+  action:
+    execute:
+      command: php
+      cli_args:
+      - /app/core/artisan
+      - migrate
+      - --force
+      env:
+        APP_ENV: production
+        APP_KEY: base64:CYjF9hplN2E2MUdW8zB+1iqucHYtGE4me0nWYsR2FUs=
+        DB_CONNECTION: mysql
+        DB_DATABASE: db_421751a8
+        DB_HOST: db.fr-roub1.bengt.wasmernet.com
+        DB_PASSWORD: pw_e2TDh46RypQmIAKVaVNEtGsfHtd49FUF
+        DB_PORT: '20184'
+        DB_USERNAME: user_79f41408
+        SESSION_DRIVER: database
+        SESSION_TABLE: sessions
+kind: wasmer.io/App.v0
+annotations:
+  anybuild.run/config:
+    name: out
+    phpix: true
+  anybuild.run/provider: php
+  anybuild.run/version: 0.25.0
+  shipitcli.com/config:
+    name: out
+    phpix: true
+  shipitcli.com/provider: php
+  shipitcli.com/version: 0.22.2
+  wasmer.io/version: 7.2.1
+enableDatabase: true

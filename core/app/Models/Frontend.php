@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Frontend extends Model
+{
+    protected $fillable = ['data_keys', 'data_values'];
+
+    protected $casts = [
+        'data_values' => 'object'
+    ];
+}

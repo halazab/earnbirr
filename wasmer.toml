@@ -1,0 +1,18 @@
+[package]
+name = "halazab/earnbirr"
+version = "1.0.0"
+description = "EarnBirr - Micro-Task & Freelance Earning Platform"
+
+[dependencies]
+"php/php" = "^8.4"
+
+[fs]
+"/app" = "."
+
+[[command]]
+name = "run"
+module = "php/php:php"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = ["-t", "/app", "-S", "localhost:8080", "/app/router.php"]
