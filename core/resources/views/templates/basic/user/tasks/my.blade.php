@@ -36,7 +36,7 @@
                                         <p class="font-medium text-gray-900">{{ $sub->task->title ?? 'N/A' }}</p>
                                     </td>
                                     <td class="py-4 px-4 lg:px-6">
-                                        <span class="text-gray-600 capitalize">{{ implode(', ', $sub->task->proof_type ?? ['N/A']) }}</span>
+                                        <span class="text-gray-600 capitalize">{{ implode(', ', (array) $sub->task->proof_type ?: ['N/A']) }}</span>
                                     </td>
                                     <td class="py-4 px-4 lg:px-6">
                                         <span class="font-medium text-emerald-500">{{ showAmount($sub->task->reward ?? 0) }}</span>

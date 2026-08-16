@@ -50,6 +50,11 @@
                             @include('templates.basic.partials.telebirr-logo')
                             <span class="text-xl font-bold text-gray-900">TeleBirr</span>
                         </div>
+                    @elseif(stripos($m->name, 'cbe') !== false)
+                        <div class="flex items-center justify-center gap-2 mb-2">
+                            @include('templates.basic.partials.cbe-logo')
+                            <span class="text-xl font-bold text-gray-900">CBE</span>
+                        </div>
                     @else
                         <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mx-auto mb-2">
                             <i class="fas fa-money-bill text-gray-500 text-xl"></i>

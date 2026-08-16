@@ -77,7 +77,7 @@ class TaskController extends Controller
             $task->remaining_slots = $request->total_slots;
         }
         $task->external_link = $request->input('external_link') ?: null;
-        $task->proof_type = json_encode($request->proof_type);
+        $task->proof_type = $request->proof_type;
         $task->end_date = $request->input('end_date') ?: null;
 
         if ($request->hasFile('task_file')) {

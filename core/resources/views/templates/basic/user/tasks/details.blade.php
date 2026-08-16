@@ -118,7 +118,7 @@
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-500">Type</span>
-                                <span class="font-medium text-gray-900 capitalize">{{ implode(', ', $task->proof_type ?? ['N/A']) }}</span>
+                                <span class="font-medium text-gray-900 capitalize">{{ implode(', ', (array) $task->proof_type ?: ['N/A']) }}</span>
                             </div>
                         </div>
                     </div>
