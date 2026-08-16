@@ -86,9 +86,9 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label font-medium text-gray-900">Your TeleBirr Number</label>
-                        <input type="text" name="account_info" class="form-input" placeholder="e.g. 912345678" required {{ $activatedReferrals < $requiredReferrals ? 'disabled' : '' }}>
-                        <p class="text-xs text-gray-400 mt-1">Enter the phone number linked to your TeleBirr account</p>
+                        <label class="form-label font-medium text-gray-900">Your {{ $m->name }} {{ stripos($m->name, 'telebirr') !== false ? 'Number' : 'Account Number' }}</label>
+                        <input type="text" name="account_info" class="form-input" placeholder="{{ stripos($m->name, 'telebirr') !== false ? 'e.g. 912345678' : 'e.g. 1000123456789' }}" required {{ $activatedReferrals < $requiredReferrals ? 'disabled' : '' }}>
+                        <p class="text-xs text-gray-400 mt-1">Enter the account number linked to your {{ $m->name }} account</p>
                     </div>
 
                     <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 rounded-xl transition-colors text-base {{ $activatedReferrals < $requiredReferrals ? 'opacity-50 cursor-not-allowed' : '' }}" {{ $activatedReferrals < $requiredReferrals ? 'disabled' : '' }}>
