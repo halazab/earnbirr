@@ -179,7 +179,7 @@ return new class extends Migration
                         'description' => "Support {$account['name']} on {$label}. {$act['action']} their official profile and help this famous Ethiopian figure grow!",
                         'instructions' => $inst,
                         'task_type' => 'social_media',
-                        'reward' => rand(100, 200),
+                        'reward' => rand(30, 50),
                         'total_slots' => rand(200, 800),
                         'remaining_slots' => rand(200, 800),
                         'external_link' => $url,
