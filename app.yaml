@@ -54,7 +54,7 @@ annotations:
     name: out
     phpix: true
   anybuild.run/provider: php
-  anybuild.run/version: 0.25.0
+  anybuild.run/version: 0.27.2
   shipitcli.com/config:
     name: out
     phpix: true

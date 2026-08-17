@@ -42,7 +42,7 @@
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500">ተሌብር ቁጥር:</span>
                             <div class="flex items-center gap-2">
-                                <span class="font-mono font-bold text-gray-900" id="phone-display">0990781902</span>
+                                <span class="font-mono font-bold text-gray-900" id="phone-display">0992534646</span>
                                 <button type="button" onclick="copyText('0990781902', this)" class="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-emerald-100 hover:text-emerald-500 transition-colors flex-shrink-0">
                                     <i class="fas fa-copy text-xs"></i>
                                 </button>
@@ -50,14 +50,14 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500">መጠሪያ ስም:</span>
-                            <span class="font-bold text-gray-900">Ayitenew lamesgin</span>
+                            <span class="font-bold text-gray-900">Samuel Aragaw</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500">የሚላከው መጠን:</span>
                             <span class="font-bold text-emerald-600">250.00 ብር</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-gray-500">ተሌብር ሪማርክ:</span>
+                            <span class="text-gray-500">ቴሌብር ሪማርክ:</span>
                             <span class="font-bold text-gray-900">Earnbirr ቅድመ-ክፍያ</span>
                         </div>
                     </div>
