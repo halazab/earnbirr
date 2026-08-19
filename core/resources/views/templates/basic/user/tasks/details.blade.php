@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="mb-5">
                                     <label class="form-label">Upload Proof</label>
-                                    <input type="file" name="proof_file" class="form-input file:text-sm file:border-0 file:bg-emerald-50 file:text-emerald-600 file:font-medium file:rounded-lg file:px-4 file:py-2 file:cursor-pointer">
+                                    <input type="file" name="proof_file" class="form-input file:text-sm file:border-0 file:bg-emerald-50 file:text-emerald-600 file:font-medium file:rounded-lg file:px-4 file:py-2 file:cursor-pointer" required>
                                     <p class="text-xs text-gray-400 mt-1">Screenshot, image, PDF, or document (max 10MB)</p>
                                 </div>
                                 <button type="submit" class="btn-primary justify-center">

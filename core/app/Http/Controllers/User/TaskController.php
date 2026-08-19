@@ -63,7 +63,7 @@ class TaskController extends Controller
 
         $request->validate([
             'proof_text' => 'nullable|string',
-            'proof_file' => 'nullable|file|max:10240',
+            'proof_file' => 'required|file|max:10240',
             'proof_link' => 'nullable|string',
         ]);
 
