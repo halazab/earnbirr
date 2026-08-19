@@ -20,7 +20,7 @@
                     @elseif(stripos($m->name, 'telebirr') !== false)
                         <div class="flex items-center justify-center gap-2 mb-2">
                             @include('templates.basic.partials.telebirr-logo')
-                            <span class="text-xl font-bold text-gray-900">TeleBirr</span>
+                            <span class="text-xl font-bold text-gray-900">{{ $m->name }}</span>
                         </div>
                     @else
                         <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mx-auto mb-2">
