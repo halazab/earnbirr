@@ -41,7 +41,9 @@ class TaskController extends Controller
         $pageTitle = 'Task Details';
         $task = Task::available()->where('slug', $slug)->with('category')->firstOrFail();
         $alreadySubmitted = TaskSubmission::where('user_id', auth()->id())
-            ->where('task_id', $task->id)->exists();
+            ->where('task_id', $task->id)
+            ->whereIn('status', [0, 1])
+            ->exists();
         return view('templates.basic.user.tasks.details', compact('pageTitle', 'task', 'alreadySubmitted'));
     }
 
@@ -56,7 +58,9 @@ class TaskController extends Controller
         }
 
         $already = TaskSubmission::where('user_id', auth()->id())
-            ->where('task_id', $id)->exists();
+            ->where('task_id', $id)
+            ->whereIn('status', [0, 1])
+            ->exists();
         if ($already) {
             return back()->withErrors(['You have already submitted for this task.']);
         }

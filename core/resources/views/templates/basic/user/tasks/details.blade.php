@@ -77,6 +77,17 @@
                             <p class="text-sm text-gray-500 mt-1 mb-4">Activate your account to submit tasks.</p>
                             <a href="{{ route('user.activation') }}" class="btn-primary">Activate Now</a>
                         </div>
+                    @elseif($alreadySubmitted)
+                        <div class="card p-6 lg:p-8 mt-6 text-center">
+                            <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-clock text-yellow-500 text-2xl"></i>
+                            </div>
+                            <h2 class="text-lg font-bold text-gray-900 mb-2">Task Submitted</h2>
+                            <p class="text-sm text-gray-500 mb-4">Your submission is under review. You cannot submit this task again until it is approved or rejected.</p>
+                            <a href="{{ route('user.tasks.my') }}" class="btn-primary">
+                                <i class="fas fa-list mr-1"></i> View My Submissions
+                            </a>
+                        </div>
                     @else
                         <div class="card p-6 lg:p-8 mt-6">
                             <h2 class="text-lg font-bold text-gray-900 mb-5">Submit Your Work</h2>

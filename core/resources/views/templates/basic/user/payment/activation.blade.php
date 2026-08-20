@@ -25,36 +25,39 @@
                 </div>
             </div>
         @else
+            @php $method = $methods->first(); @endphp
             <div class="card overflow-hidden">
-                {{-- TeleBirr Header --}}
+                {{-- Method Header --}}
                 <div class="p-5 text-center border-b border-gray-100">
                     <div class="flex items-center justify-center gap-2 mb-2">
-                        @include('templates.basic.partials.telebirr-logo')
-                        <span class="text-xl font-bold text-gray-900">TeleBirr</span>
+                        @if($method && stripos($method->name, 'telebirr') !== false)
+                            @include('templates.basic.partials.telebirr-logo')
+                        @endif
+                        <span class="text-xl font-bold text-gray-900">{{ $method->name ?? 'Payment' }}</span>
                     </div>
                 </div>
 
                 {{-- Payment Instructions --}}
                 <div class="p-5 bg-gray-50 text-sm text-gray-600 space-y-3">
-                    <p class="font-bold text-gray-900">⚡️Earnbirr ቅድመ-ምዝገባ (250 ብር)</p>
+                    <p class="font-bold text-gray-900">⚡️Earnbirr ቅድመ-ምዝገባ ({{ $fee }} ብር)</p>
 
                     <div class="bg-white rounded-xl p-3 border border-gray-200 space-y-2">
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500">ተሌብር ቁጥር:</span>
                             <div class="flex items-center gap-2">
-                                <span class="font-mono font-bold text-gray-900" id="phone-display">0992534646</span>
-                                <button type="button" onclick="copyText('0990781902', this)" class="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-emerald-100 hover:text-emerald-500 transition-colors flex-shrink-0">
+                                <span class="font-mono font-bold text-gray-900" id="phone-display">{{ $method->phone_number ?? '' }}</span>
+                                <button type="button" onclick="copyText('{{ $method->phone_number ?? '' }}', this)" class="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-emerald-100 hover:text-emerald-500 transition-colors flex-shrink-0">
                                     <i class="fas fa-copy text-xs"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500">መጠሪያ ስም:</span>
-                            <span class="font-bold text-gray-900">Samuel Aragaw</span>
+                            <span class="font-bold text-gray-900">{{ $method->account_name ?? $method->name ?? '' }}</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500">የሚላከው መጠን:</span>
-                            <span class="font-bold text-emerald-600">250.00 ብር</span>
+                            <span class="font-bold text-emerald-600">{{ number_format($fee, 2) }} ብር</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500">ቴሌብር ሪማርክ:</span>
