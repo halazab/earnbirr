@@ -8,7 +8,7 @@ class GeneralSetting extends Model
 {
     protected $fillable = [
         'site_name', 'cur_text', 'cur_sym', 'base_color', 'secondary_color',
-        'min_withdraw', 'max_withdraw', 'activation_fee', 'email_from', 'email_template',
+        'min_withdraw', 'max_withdraw', 'activation_fee', 'task_reward_min', 'task_reward_max', 'email_from', 'email_template',
         'sms_api', 'otp_expiration', 'daily_claim_reward',
         'footer_text', 'footer_address', 'footer_email', 'footer_phone',
         'social_telegram', 'social_facebook', 'social_twitter', 'social_instagram',

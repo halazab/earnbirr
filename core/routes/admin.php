@@ -69,6 +69,8 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('submissions/reject/{id}', 'rejectSubmission')->name('submissions.reject');
     });
 
+    Route::post('tasks/regenerate-prices', [AdminController::class, 'regenerateTaskPrices'])->name('tasks.regenerate.prices');
+
     Route::controller(DepositController::class)->prefix('deposits')->name('deposits.')->group(function () {
         Route::get('/', 'all')->name('all');
         Route::get('pending', 'pending')->name('pending');

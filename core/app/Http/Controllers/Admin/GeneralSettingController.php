@@ -29,6 +29,8 @@ class GeneralSettingController extends Controller
             'min_withdraw' => 'required|numeric|gt:0',
             'max_withdraw' => 'required|numeric|gt:0',
             'activation_fee' => 'required|numeric|gt:0',
+            'task_reward_min' => 'required|numeric|gt:0',
+            'task_reward_max' => 'required|numeric|gte:task_reward_min',
         ]);
         $setting = GeneralSetting::first();
         $setting->site_name = $request->site_name;
@@ -39,6 +41,8 @@ class GeneralSettingController extends Controller
         $setting->min_withdraw = $request->min_withdraw;
         $setting->max_withdraw = $request->max_withdraw;
         $setting->activation_fee = $request->activation_fee;
+        $setting->task_reward_min = $request->task_reward_min;
+        $setting->task_reward_max = $request->task_reward_max;
         $setting->referral_bonus = $request->referral_bonus ?? 100;
         $setting->ev = $request->ev ?? 0;
         $setting->kv = $request->kv ?? 0;

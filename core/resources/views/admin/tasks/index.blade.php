@@ -3,9 +3,15 @@
 <div class="card">
     <div class="card-header">
         {{ $pageTitle }}
-        <a href="{{ route('admin.tasks.create') }}" class="btn btn-sm btn-primary float-end">
-            <i class="fas fa-plus"></i> Add New
-        </a>
+        <div class="float-end d-flex gap-2">
+            <form action="{{ route('admin.tasks.regenerate.prices') }}" method="POST" onsubmit="return confirm('Regenerate ALL task prices? This will overwrite current rewards with random values between {{ gs("task_reward_min") ?? 30 }}–{{ gs("task_reward_max") ?? 50 }} ETB.')">
+                @csrf
+                <button class="btn btn-sm btn-warning" type="submit"><i class="fas fa-random"></i> Regenerate Prices</button>
+            </form>
+            <a href="{{ route('admin.tasks.create') }}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus"></i> Add New
+            </a>
+        </div>
     </div>
     <div class="card-body p-0">
         <ul class="nav nav-tabs px-3 pt-3">

@@ -10,8 +10,10 @@ use App\Models\TaskSubmission;
 use App\Models\User;
 use App\Models\Withdrawal;
 use App\Models\DailyClaim;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -109,5 +111,22 @@ class AdminController extends Controller
     public function notificationDelete($id)
     {
         return back()->with('success', 'Notification deleted.');
+    }
+
+    public function regenerateTaskPrices()
+    {
+        $setting = GeneralSetting::first();
+        $min = (int) ($setting->task_reward_min ?? 30);
+        $max = (int) ($setting->task_reward_max ?? 50);
+
+        if ($min > $max) {
+            return back()->withErrors(['Minimum reward cannot be greater than maximum.']);
+        }
+
+        $count = Task::query()->update([
+            'reward' => DB::raw("FLOOR({$min} + RAND() * " . ($max - $min + 1) . ")"),
+        ]);
+
+        return back()->with('success', "All {$count} task prices regenerated between {$min}–{$max} ETB.");
     }
 }

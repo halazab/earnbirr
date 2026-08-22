@@ -39,6 +39,16 @@
                     <input type="number" step="any" name="activation_fee" class="form-control" value="{{ gs('activation_fee') }}" required>
                 </div>
                 <div class="col-md-3">
+                    <label class="form-label">Task Reward Min (ETB)</label>
+                    <input type="number" step="any" name="task_reward_min" class="form-control" value="{{ gs('task_reward_min') ?? 30 }}" min="1" required>
+                    <small class="text-muted">Lowest task reward</small>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Task Reward Max (ETB)</label>
+                    <input type="number" step="any" name="task_reward_max" class="form-control" value="{{ gs('task_reward_max') ?? 50 }}" min="1" required>
+                    <small class="text-muted">Highest task reward</small>
+                </div>
+                <div class="col-md-3">
                     <label class="form-label">Referral Bonus (ETB)</label>
                     <input type="number" step="any" name="referral_bonus" class="form-control" value="{{ gs('referral_bonus') ?? 100 }}" required>
                     <small class="text-muted">Amount paid per referral</small>
