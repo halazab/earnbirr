@@ -29,7 +29,7 @@ class TaskController extends Controller
             });
         }
 
-        $tasks = $tasks->latest()->paginate(getPaginate());
+        $tasks = $tasks->latest()->paginate(50)->withQueryString();
         return view('templates.basic.user.tasks.index', compact('pageTitle', 'tasks', 'categories'));
     }
 
