@@ -83,6 +83,8 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('methods/store/{id?}', 'methodStore')->name('methods.store');
         Route::post('methods/toggle-status/{id}', 'methodToggleStatus')->name('methods.toggle.status');
         Route::post('methods/delete/{id}', 'methodDelete')->name('methods.delete');
+        Route::get('activation-settings', 'activationSettings')->name('activation.settings');
+        Route::post('activation-settings', 'activationSettingsUpdate')->name('activation.settings.update');
     });
 
     Route::controller(WithdrawalController::class)->prefix('withdrawals')->name('withdrawals.')->group(function () {

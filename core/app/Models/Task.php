@@ -35,10 +35,10 @@ class Task extends Model
 
     public function scopeAvailable($query)
     {
-        return $query->where('status', 1)
+        return $query->where('tasks.status', 1)
             ->where(function ($q) {
-                $q->whereNull('end_date')->orWhere('end_date', '>', now());
+                $q->whereNull('tasks.end_date')->orWhere('tasks.end_date', '>', now());
             })
-            ->where('remaining_slots', '>', 0);
+            ->where('tasks.remaining_slots', '>', 0);
     }
 }

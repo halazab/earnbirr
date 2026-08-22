@@ -133,7 +133,8 @@ class TaskController extends Controller
     public function pendingSubmissions()
     {
         $pageTitle = 'Pending Submissions';
-        $submissions = $this->applySubmissionSearch(TaskSubmission::pending())->with(['user', 'task'])->latest()->paginate(getPaginate());
+        request()->merge(['status' => 'pending']);
+        $submissions = $this->applySubmissionSearch(TaskSubmission::query())->with(['user', 'task'])->latest()->paginate(getPaginate());
         return view('admin.tasks.submissions', compact('pageTitle', 'submissions'));
     }
 
@@ -152,6 +153,23 @@ class TaskController extends Controller
                 });
             });
         }
+
+        if ($dateFrom = request('date_from')) {
+            $query->whereDate('created_at', '>=', $dateFrom);
+        }
+        if ($dateTo = request('date_to')) {
+            $query->whereDate('created_at', '<=', $dateTo);
+        }
+
+        $status = request('status');
+        if ($status === 'pending') {
+            $query->where('status', 0);
+        } elseif ($status === 'approved') {
+            $query->where('status', 1);
+        } elseif ($status === 'rejected') {
+            $query->where('status', 2);
+        }
+
         return $query;
     }
 

@@ -14,22 +14,32 @@ class TaskController extends Controller
     {
         $pageTitle = 'Available Tasks';
         $categories = TaskCategory::active()->get();
-        $tasks = Task::available()->with('category');
+        $userId = auth()->id();
+
+        $tasks = Task::available()
+            ->with('category')
+            ->leftJoin('task_submissions', function ($join) use ($userId) {
+                $join->on('tasks.id', '=', 'task_submissions.task_id')
+                     ->where('task_submissions.user_id', '=', $userId);
+            })
+            ->selectRaw('tasks.*, task_submissions.id as submission_id')
+            ->selectRaw('CASE WHEN task_submissions.id IS NULL THEN 0 ELSE 1 END as is_submitted')
+            ->orderByRaw('is_submitted ASC, tasks.created_at DESC');
 
         if ($request->category) {
-            $tasks->where('category_id', $request->category);
+            $tasks->where('tasks.category_id', $request->category);
         }
         if ($request->type) {
-            $tasks->where('task_type', $request->type);
+            $tasks->where('tasks.task_type', $request->type);
         }
         if ($request->search) {
             $tasks->where(function ($q) use ($request) {
-                $q->where('title', 'like', '%' . $request->search . '%')
-                    ->orWhere('description', 'like', '%' . $request->search . '%');
+                $q->where('tasks.title', 'like', '%' . $request->search . '%')
+                    ->orWhere('tasks.description', 'like', '%' . $request->search . '%');
             });
         }
 
-        $tasks = $tasks->latest()->paginate(50)->withQueryString();
+        $tasks = $tasks->paginate(50)->withQueryString();
         return view('templates.basic.user.tasks.index', compact('pageTitle', 'tasks', 'categories'));
     }
 

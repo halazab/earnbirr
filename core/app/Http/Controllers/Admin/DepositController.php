@@ -8,7 +8,9 @@ use App\Models\DepositMethod;
 use App\Models\Referral;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class DepositController extends Controller
 {
@@ -237,5 +239,46 @@ class DepositController extends Controller
         $method = DepositMethod::findOrFail($id);
         $method->delete();
         return back()->with('success', 'Deposit method deleted.');
+    }
+
+    public function activationSettings()
+    {
+        $pageTitle = 'Activation Settings';
+        $method = DepositMethod::first();
+        $setting = gs();
+        return view('admin.deposits.activation_settings', compact('pageTitle', 'method', 'setting'));
+    }
+
+    public function activationSettingsUpdate(Request $request)
+    {
+        $request->validate([
+            'phone_number' => 'required|string|max:20',
+            'account_name' => 'required|string|max:255',
+            'activation_fee' => 'required|numeric|gt:0',
+        ]);
+
+        $method = DepositMethod::first();
+        if (!$method) {
+            $method = new DepositMethod();
+            $method->name = 'Telebirr';
+            $method->currency = 'ETB';
+            $method->min_amount = 10;
+            $method->max_amount = 50000;
+            $method->fixed_charge = 0;
+            $method->percent_charge = 0;
+            $method->status = 1;
+        }
+        $method->phone_number = $request->phone_number;
+        $method->account_name = $request->account_name;
+        $method->save();
+
+        $setting = GeneralSetting::first();
+        if ($setting) {
+            $setting->activation_fee = $request->activation_fee;
+            $setting->save();
+            Cache::forget('GeneralSetting');
+        }
+
+        return back()->with('success', 'Activation settings updated successfully.');
     }
 }

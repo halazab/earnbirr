@@ -3,11 +3,20 @@
 <div class="card">
     <div class="card-header">
         {{ $pageTitle }}
-        <form action="" method="GET" class="float-end d-flex gap-2">
+        <form action="" method="GET" class="float-end d-flex gap-2 flex-wrap">
             <div class="input-group input-group-sm" style="width:200px">
                 <input type="text" name="search" class="form-control" placeholder="Search user, phone or task" value="{{ request('search') }}">
                 <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
             </div>
+            <input type="date" name="date_from" class="form-control form-control-sm" style="width:155px" value="{{ request('date_from') }}" title="From Date" placeholder="From Date">
+            <input type="date" name="date_to" class="form-control form-control-sm" style="width:155px" value="{{ request('date_to') }}" title="To Date" placeholder="To Date">
+            <button class="btn btn-outline-primary btn-sm" type="submit"><i class="fas fa-filter"></i> Filter</button>
+            @if(request('search') || request('date_from') || request('date_to') || request('status'))
+                <a href="{{ route('admin.tasks.submissions') }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-times"></i> Clear</a>
+            @endif
+            @if(request('status'))
+                <input type="hidden" name="status" value="{{ request('status') }}">
+            @endif
         </form>
     </div>
     <div class="card-body p-0">

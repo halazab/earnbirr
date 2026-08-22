@@ -205,8 +205,11 @@
             <a href="{{ route('admin.deposits.methods') }}" class="{{ request()->routeIs('admin.deposits.methods*') ? 'active' : '' }}">
                 <i class="fas fa-cog"></i> Deposit Methods
             </a>
-            <a href="{{ route('admin.deposits.activation') }}" class="{{ request()->routeIs('admin.deposits.activation*') ? 'active' : '' }}">
-                <i class="fas fa-user-check"></i> Activation
+            <a href="{{ route('admin.deposits.activation') }}" class="{{ request()->routeIs('admin.deposits.activation') && !request()->routeIs('admin.deposits.activation.settings') ? 'active' : '' }}">
+                <i class="fas fa-user-check"></i> Activation Deposits
+            </a>
+            <a href="{{ route('admin.deposits.activation.settings') }}" class="{{ request()->routeIs('admin.deposits.activation.settings*') ? 'active' : '' }}">
+                <i class="fas fa-cog"></i> Activation Settings
             </a>
             <a href="{{ route('admin.withdrawals.all') }}" class="{{ request()->routeIs('admin.withdrawals.*') && !request()->routeIs('admin.withdrawals.methods*') ? 'active' : '' }}">
                 <i class="fas fa-credit-card"></i> Withdrawals
